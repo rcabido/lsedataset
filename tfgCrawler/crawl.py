@@ -1,6 +1,7 @@
 from sys import argv
 import requests
 from bs4 import BeautifulSoup as scrap
+import pytube
 
 script, search = argv
 
@@ -22,6 +23,8 @@ if (search!=None):
 		item='https://www.youtube.com'+video['href']
 		listUrlVideos.append(item)
 		print(item)
+		vid=pytube.YouTube(item)
+		vid.streams.first().download()
 	
 else:
 	print('Es necesario un parametro de busqueda');
