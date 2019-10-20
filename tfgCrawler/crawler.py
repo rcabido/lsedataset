@@ -25,7 +25,8 @@ if(fileName!=None):
 			pagePlaylist=req.text
 			soup=scrap(pagePlaylist,'html.parser')
 			titlePlaylist=soup.find_all('h3',"playlist-title")[0].contents[1].string
-			os.mkdir(titlePlaylist.rstrip(" "))
+			if(os.path.exists(titlePlaylist.rstrip(" "))!=True):
+				os.mkdir(titlePlaylist.rstrip(" "))
 			htmlVideos=soup.find_all('a',"playlist-video")
 			os.chdir(titlePlaylist.rstrip(" "))
 			for htmlVideo in htmlVideos:
@@ -43,7 +44,7 @@ if(fileName!=None):
 	                	        subtitles=open(vid.title+'.txt','w')
         		                subtitles.write(caption.generate_srt_captions())
 	        	                subtitles.close()
-			os.chdir()
+			os.chdir("..")
 
 		else:
 			req=requests.get(item.link)
