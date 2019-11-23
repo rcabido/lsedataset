@@ -105,11 +105,7 @@ venv.bak/
 
 
 # videos
-/VideosTfgLSE/
-/A1 Lengua de Signos Española Básico/
-/A2 Lengua de Signos Española Básico/
-/Curso Básico Lengua de Señas Colombiana (LSC)/
-/TUTORIALES LSE/
+/sample/VideosTFG/
 *.mp4
 *.webm
-*.txt
+
