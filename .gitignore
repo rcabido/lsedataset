@@ -103,9 +103,9 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-
+/openpose
 # videos
-/sample/VideosTFG/
+/openpose/VideosTFG/
 *.mp4
 *.webm
 

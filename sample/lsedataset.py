@@ -11,7 +11,6 @@ script, fileName = argv
 
 
 os.chdir("..")
-os.chdir("..")
 os.chdir("openpose")
 cwd = os.getcwd()
 print(cwd+"JEJE")
@@ -24,7 +23,7 @@ for r, d, f in os.walk(cwd):
 for f in files:
     print(f)
     os.rename(f, f.replace(" ", ""))
-    path= f.replace(" ", "").split("tfg\\openpose\\")[1]
+    path= f.replace(" ", "").split("tfg\\lsedataset\\openpose\\")[1]
     print(path)
     params= " --video "+ path +" --face --hand --write_json " + path +".json"
     print("build\\x64\\Release\\OpenPoseDemo.exe"+params)
