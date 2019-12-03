@@ -31,7 +31,6 @@ sudo apt-get install python3.X
 Open a Terminal
 sudo apt update
 sudo apt-get install python3-pip
-
 ```
 
 ##### Git
@@ -87,6 +86,12 @@ pip install -r requirements.txt
 
 ```
 ....
+git clone mi proyecto
+cd lsedataset
+git clone openpose
+Requirements.txt
+cmake
+* [Openpose](https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/installation.md) - The principal framework to detect the poses
 ```
 
 Example of getting some data out of the system or using it for a little demo
