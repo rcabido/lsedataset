@@ -91,7 +91,7 @@ cd lsedataset
 git clone openpose
 Requirements.txt
 cmake
-* [Openpose](https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/installation.md/) - The principal framework to detect the poses
+* [Openpose](https://www.github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/installation.md/) - The principal framework to detect the poses
 ```
 
 Example of getting some data out of the system or using it for a little demo
