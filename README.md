@@ -74,28 +74,53 @@ sudo apt-get install git
 
 ### Installing
 
-A step by step 
-
-Say what the step will be
+#### Clone or Download the project
 
 ```
-pip install -r requirements.txt
+1. Click to clone or download in the button that it is situated at top of this page.
+2. Copy the link if you want clone it and go to 3. or download and unzip the file wherever you want.
+3. Go to the directoy you want and execute:
+      git clone **link** 
+  Where the link is the result of second step
 ```
 
-
-
+#### Install the Requeriments
 ```
-....
-git clone mi proyecto
-cd lsedataset
-git clone openpose
-Requirements.txt
-cmake
-* [Openpose](https://www.github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/installation.md/) - The principal framework to detect the poses
+1. Go to the directory 'lsedataset' 
+2. Run the command:
+      pip install -r Requirements.txt
 ```
 
-Example of getting some data out of the system or using it for a little demo
+#### Clone or download Openpose
 
+```
+1. Go to the directory 'lsedataset' 
+  (if you want to go by commmand execute 'cd lsedataset' after clone this project)
+2. Go to [Openpose](https://github.com/CMU-Perceptual-Computing-Lab/openpose/) and click to clone or download in the button situated at top of that page.
+3. Copy the link if you want clone it and go to 3. or download and unzip the file in the new directory.
+4. Execute 
+      git clone **link** 
+  Where the link is the result of second step
+```
+#### Install Openpose GPU only mode
+
+##### Install Cmake
+
+´´´
+**Windows**
+1. Install CMake GUI: Download and install the Latest Release of CMake Windows win64-x64 Installer from the CMake download website, called cmake-X.X.X-win64-x64.msi
+2. Install Microsoft Visual Studio (VS) 2017 Enterprise with all C++-related flags when selecting the components to install.
+
+**Ubuntu**
+1. Run the command:
+      sudo apt-get install cmake-qt-gui.
+´´´
+
+#### Configure Openpose
+´´´
+
+* [Openpose](https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/installation.md) - The principal framework to detect the poses
+´´´
 
 ## Deployment
 
