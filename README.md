@@ -1,14 +1,10 @@
 # lsedataset
 Spanish Sign Language dataset 
 
-To run this project must install the Python libraries 'pytube' and 'BeautifulSoup'
-
-Instruction to run:
-  python crawler urlVideos.txt
-
 ## Getting Started
 
-This project will consist of the construction of a video data set, subtitles of sign language people and their corresponding poses
+This project will consist of the construction of a video data set, subtitles of sign language people and their corresponding poses.
+The [Openpose](https://github.com/CMU-Perceptual-Computing-Lab/openpose/) - The principal framework to detect the poses.
 
 ### Prerequisites
 
@@ -96,7 +92,7 @@ sudo apt-get install git
 ```
 1. Go to the directory 'lsedataset' 
   (if you want to go by commmand execute 'cd lsedataset' after clone this project)
-2. Go to [Openpose](https://github.com/CMU-Perceptual-Computing-Lab/openpose/) and click to clone or download in the button situated at top of that page.
+2. Go to https://github.com/CMU-Perceptual-Computing-Lab/openpose/ and click to clone or download in the button situated at top of that page.
 3. Copy the link if you want clone it and go to 3. or download and unzip the file in the new directory.
 4. Execute 
       git clone **link** 
@@ -106,25 +102,65 @@ sudo apt-get install git
 
 ##### Install Cmake
 
-´´´
-**Windows**
+```
+  Windows
 1. Install CMake GUI: Download and install the Latest Release of CMake Windows win64-x64 Installer from the CMake download website, called cmake-X.X.X-win64-x64.msi
 2. Install Microsoft Visual Studio (VS) 2017 Enterprise with all C++-related flags when selecting the components to install.
 
-**Ubuntu**
+  Ubuntu
 1. Run the command:
       sudo apt-get install cmake-qt-gui.
-´´´
+```
 
-#### Configure Openpose
-´´´
+##### OpenPose Configuration
 
-* [Openpose](https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/installation.md) - The principal framework to detect the poses
-´´´
+1. Open CMake GUI and select the OpenPose directory as project source directory, and a non-existing or empty sub-directory called `build` where the Makefile files (Ubuntu) or Visual Studio solution (Windows) will be generated. If `build` does not exist, it will ask you whether to create it. Press `Yes`.
+<p align="center">
+    <img src="mediaOpenposeReadme/im_1.png", width="480">
+    <img src="mediaOpenposeReadme/im_1_windows.png", width="480">
+</p>
+
+2. Press the `Configure` button, keep the generator in `Unix Makefile` (Ubuntu) or set it to your 64-bit Visual Studio version (Windows), and press `Finish`. Select the option `only CPU` in `GPU model`
+<p align="center">
+    <img src="mediaOpenposeReadme/im_2.png", width="240">
+    <img src="mediaOpenposeReadme/im_2_windows.png", width="240">
+    <img src="mediaOpenposeReadme/im_2_windows_new.png", width="240">
+    <img src="mediaOpenposeReadme/im_2cmake.png", width="240">
+</p>
+
+3. If this step is successful, the `Configuring done` text will appear in the bottom box in the last line. Otherwise, some red text will appear in that same bottom box.
+<p align="center">
+    <img src="mediaOpenposeReadme/im_3.png", width="480">
+    <img src="mediaOpenposeReadme/im_3_windows.png", width="480">
+</p>
+
+4. Press the `Generate` button and proceed to [OpenPose Building](#openpose-building). You can now close CMake.
+
+
+For more information go to Openpose installation document:
+* [Openpose](https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/installation.md) 
+
+##### Build Openpose
+
+###### Ubuntu
+
+Build the project by running the following commands.
+
+cd build/
+make -j`nproc`
+
+###### Windows
+
+Open the Visual Studio solution (Windows), called build/OpenPose.sln. Then, set the configuration from Debug to Release and press the green triangle icon to run it.
 
 ## Deployment
 
+Tu run this project you have to go to the lsedataset directory, enter in sample folder and execute this:
 
+```
+  python lsedataset.py ej.txt
+where the ej.txt is a filetext that it contains url for playlist or videos.
+```
 
 ## Authors
 
