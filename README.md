@@ -124,6 +124,8 @@ sudo apt-get install git
 <p align="center">
     <img src="mediaOpenposeReadme/im_2.png", width="240">
     <img src="mediaOpenposeReadme/im_2_windows.png", width="240">
+</p>
+<p align="center">
     <img src="mediaOpenposeReadme/im_2_windows_new.png", width="240">
     <img src="mediaOpenposeReadme/im_2cmake.png", width="240">
 </p>
