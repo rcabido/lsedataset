@@ -123,9 +123,6 @@ sudo apt-get install git
 2. Press the `Configure` button, keep the generator in `Unix Makefile` (Ubuntu) or set it to your 64-bit Visual Studio version (Windows), and press `Finish`. Select the option `only CPU` in `GPU model`
 <p align="center">
     <img src="mediaOpenposeReadme/im_2.png", width="480">
-    <img src="mediaOpenposeReadme/im_2_windows.png", width="480">
-</p>
-<p align="center">
     <img src="mediaOpenposeReadme/im_2_windows_new.png", width="480">
     <img src="mediaOpenposeReadme/im_2cmake.png", width="480">
 </p>
