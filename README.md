@@ -87,16 +87,16 @@ sudo apt-get install git
       pip install -r Requirements.txt
 ```
 
-#### Clone or download Openpose
+#### Clone Openpose
+
+Openpose is add to this project like a submodule, to clone it you have to run this commands:
 
 ```
 1. Go to the directory 'lsedataset' 
   (if you want to go by commmand execute 'cd lsedataset' after clone this project)
-2. Go to https://github.com/CMU-Perceptual-Computing-Lab/openpose/ and click to clone or download in the button situated at top of that page.
-3. Copy the link if you want clone it and go to 3. or download and unzip the file in the new directory.
-4. Execute 
-      git clone **link** 
-  Where the link is the result of second step
+2. Execute the following instrucctions:
+      git submodule init
+      git submodule update
 ```
 #### Install Openpose GPU only mode
 
