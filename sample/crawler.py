@@ -15,7 +15,7 @@ class Crawler (object):
 			file= textFile.TextFile(self.fileName)
 			list=file.listUrls()
 			os.chdir("..")
-			os.chdir("openpose")
+			os.chdir("data")
 			if(not os.path.isdir("VideosTFG")):
 				os.mkdir("VideosTFG")
 			os.chdir("VideosTFG")
@@ -65,6 +65,7 @@ class Crawler (object):
 						#print(soup)
 			else:
 				raise Exception('The file name is wrong.')
+			os.chdir("..")
 		else:
 			raise Exception('The number of params is wrong.')
 

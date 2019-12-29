@@ -6,12 +6,12 @@ from subprocess import call
 
 script, fileName = argv
 
-#crawl= crawler.Crawler(fileName)
-#crawl.crawl()
+crawl= crawler.Crawler(fileName)
+crawl.crawl()
 
 
-os.chdir("..")
-os.chdir("openpose")
+#os.chdir("..")
+#os.chdir("data")
 cwd = os.getcwd()
 print(cwd+"JEJE")
 files = []
@@ -21,11 +21,8 @@ for r, d, f in os.walk(cwd):
         if ('.mp4' in file)|('.webm' in file):
             files.append(os.path.join(r, file))
 for f in files:
-    print(f)
+    print("Pose detection: " + f)
     os.rename(f, f.replace(" ", ""))
-    path= f.replace(" ", "").split("lsedataset\\openpose\\")[1]
-    print(path)
+    path= f.replace(" ", "").split("lsedataset\\data\\")[1]
     params= " --video "+ path +" --face --hand --write_json " + path +".json"
-    print("build\\x64\\Release\\OpenPoseDemo.exe"+params)
-    #os.system(params)
-    call("build/x64/Release/OpenPoseDemo.exe"+params, shell=False)
+    call("Release/OpenPoseDemo.exe"+params, shell=False)
