@@ -115,23 +115,19 @@ Openpose is add to this project like a submodule, to clone it you have to run th
 ##### OpenPose Configuration
 
 1. Open CMake GUI and select the OpenPose directory as project source directory, and a non-existing or empty sub-directory called `build` where the Makefile files (Ubuntu) or Visual Studio solution (Windows) will be generated. If `build` does not exist, it will ask you whether to create it. Press `Yes`.
-<p align="center">
-    <img src="mediaOpenposeReadme/im_1.png", width="480">
-    <img src="mediaOpenposeReadme/im_1_windows.png", width="480">
-</p>
+
+![im_1](https://user-images.githubusercontent.com/37367277/70981368-48286e00-20b5-11ea-85d0-972237b70146.png)
 
 2. Press the `Configure` button, keep the generator in `Unix Makefile` (Ubuntu) or set it to your 64-bit Visual Studio version (Windows), and press `Finish`. Select the option `only CPU` in `GPU model`
-<p align="center">
-    <img src="mediaOpenposeReadme/im_2.png", width="480">
-    <img src="mediaOpenposeReadme/im_2_windows_new.png", width="480">
-    <img src="mediaOpenposeReadme/im_2cmake.png", width="480">
-</p>
+
+![im_2](https://user-images.githubusercontent.com/37367277/70981357-46f74100-20b5-11ea-9bcb-ff40e19cd600.png)
+![im_2_windows_new](https://user-images.githubusercontent.com/37367277/70981361-478fd780-20b5-11ea-9f22-18d1f9f6d746.png)
+![im_2cmake](https://user-images.githubusercontent.com/37367277/70981362-478fd780-20b5-11ea-9eff-6e0b196d5372.png)
 
 3. If this step is successful, the `Configuring done` text will appear in the bottom box in the last line. Otherwise, some red text will appear in that same bottom box.
-<p align="center">
-    <img src="mediaOpenposeReadme/im_3.png", width="480">
-    <img src="mediaOpenposeReadme/im_3_windows.png", width="480">
-</p>
+
+![im_3](https://user-images.githubusercontent.com/37367277/70981363-48286e00-20b5-11ea-8213-550a509ed200.png)
+![im_3_windows](https://user-images.githubusercontent.com/37367277/70981364-48286e00-20b5-11ea-9969-b6dd9f96f941.png)
 
 4. Press the `Generate` button and proceed to [OpenPose Building](#openpose-building). You can now close CMake.
 
