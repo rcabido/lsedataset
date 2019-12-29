@@ -25,4 +25,4 @@ for f in files:
     os.rename(f, f.replace(" ", ""))
     path= f.replace(" ", "").split("lsedataset\\data\\")[1]
     params= " --video "+ path +" --face --hand --write_json " + path +".json"
-    call("Release/OpenPoseDemo.exe"+params, shell=False)
+    call("openpose.bin"+params, shell=False)
