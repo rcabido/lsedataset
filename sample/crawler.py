@@ -1,4 +1,3 @@
-
 import requests
 import textFile
 from bs4 import BeautifulSoup as scrap
