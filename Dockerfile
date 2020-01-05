@@ -1,12 +1,12 @@
 FROM ubuntu:18.04
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update -y && \
     apt-get install -y python3-pip python3-dev
 
 RUN apt-get install wget apt-utils lsb-core cmake git -y && \
     apt-get install libopencv-dev -y 
-
-WORKDIR /usr/src/lsedataset
 
 RUN mkdir data
 
@@ -18,7 +18,7 @@ RUN pip3 install -r Requirements.txt
 COPY bugPytube.sh ./
 COPY mixins.py ./
 
-RUN sh bugPytube.sh
+#RUN sh bugPytube.sh
 
 RUN git clone https://github.com/CMU-Perceptual-Computing-Lab/openpose.git
 
@@ -32,8 +32,6 @@ RUN sed -i 's/\<sudo -H\>//g' install_deps.sh; \
    sed -i 's/\<sudo\>//g' install_deps.sh; \
    sed -i 's/\<easy_install pip\>//g' install_deps.sh; \
    sync; sleep 1; bash install_deps.sh
-
-ENV DEBIAN_FRONTEND=noninteractive
 
 WORKDIR /openpose/build
 
@@ -51,4 +49,4 @@ ENV LANG es_ES.UTF-8
 ENV LANGUAGE es_ES:es
 ENV LC_ALL es_ES.UTF-8
 
-WORKDIR usr/src/lsedataset/
+WORKDIR ./
