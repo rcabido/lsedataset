@@ -1,28 +1,31 @@
-import crawler
+import lsedatasetBuild
+import lsedatasetRead
+import lsedata
 from sys import argv
 import os
-from subprocess import call
-
 
 script, fileName = argv
 
-crawl= crawler.Crawler(fileName)
-crawl.crawl()
+        ######################
+        #To build the DataSet#
+        ######################
 
+#build = lsedatasetBuild.lsedatasetBuild(fileName)
+#build.download()
+#build.buildPoses()
 
-#os.chdir("..")
-#os.chdir("data")
+        ######################
+        #To loadPaths DataSet#
+        ######################
+
 cwd = os.getcwd()
-print(cwd+"JEJE")
-files = []
-# r=root, d=directories, f = files
-for r, d, f in os.walk(cwd):
-    for file in f:
-        if ('.mp4' in file)|('.webm' in file):
-            files.append(os.path.join(r, file))
-for f in files:
-    print("Pose detection: " + f)
-    os.rename(f, f.replace(" ", ""))
-    path= f.replace(" ", "").split("lsedataset\\data\\")[1]
-    params= " --video "+ path +" --face --hand --write_json " + path +".json"
-    call("openpose.bin"+params, shell=False)
+if ('sample' in cwd):
+    os.chdir("..")
+    os.chdir("data")
+    cwd = os.getcwd()
+read = lsedatasetRead.lsedatasetRead(cwd)
+data = read.load()
+for file in data:
+    file.printPaths()
+    
+
