@@ -38,7 +38,7 @@ class Crawler (object):
 							urlItem='https://www.youtube.com'+htmlVideo['href']
 							print(urlItem)
 							vid=pytube.YouTube(urlItem)
-							vid.streams.first().download()
+							vid.streams.first().download(filename=vid.title.replace(" ",""))
 							captions=vid.captions.all()
 							for cap in captions:
 								print(cap)
@@ -53,7 +53,7 @@ class Crawler (object):
 						os.chdir("..")
 					else:
 						vid=pytube.YouTube(item)
-						vid.streams.first().download()
+						vid.streams.first().download(filename=vid.title.replace(" ",""))
 						caption=vid.captions.get_by_language_code('es')
 						print(caption)
 						if (caption!=None):	

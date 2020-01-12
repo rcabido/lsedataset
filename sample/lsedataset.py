@@ -70,6 +70,8 @@ while not exit:
         data = read.load()
         for file in data:
             file.printPaths()
+        element = read.getElement()
+        element.printPaths()
     elif option == 3:
         print("Exiting...")
         exit = True

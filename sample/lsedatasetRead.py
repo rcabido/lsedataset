@@ -24,3 +24,31 @@ class lsedatasetRead:
                     aux = lsedata.Lsedata(os.path.join(r, file),subtitle,posesFiles)
                     data.append(aux)
         return data
+
+    def getElement(self):
+        valid=False
+        name=""
+        while(not valid):
+            try:
+                name = input("Enter the name of the file: ")
+                for r, d, f in os.walk(self.path):
+                    for file in f:
+                        if ('.mp4' in file)|('.webm' in file):
+                            if (name in file):
+                                print( os.path.join(r, file))
+                                if ('.mp4' in file):
+                                    subtitle = os.path.join(r, file).replace('.mp4','.txt')
+                                else:
+                                    subtitle = os.path.join(r, file).replace('.webm','.txt')
+                                urlsFile = open(subtitle, 'r').readlines()
+                                posesPath = os.path.join(r, file) + '.json'
+                                posesFiles = []
+                                for rjson, djson, fjson in os.walk(posesPath):
+                                    for filejson in fjson:
+                                        if ('.json' in filejson):
+                                            posesFiles.append(os.path.join(rjson,filejson))
+                                aux = lsedata.Lsedata(os.path.join(r, file),subtitle,posesFiles)
+                                valid=True
+            except FileNotFoundError:
+                print("Wrong file name, try again")
+        return aux
