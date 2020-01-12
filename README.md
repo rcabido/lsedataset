@@ -153,9 +153,11 @@ Open the Visual Studio solution (Windows), called build/OpenPose.sln. Then, set 
 Tu run this project you have to go to the lsedataset directory, enter in sample folder and execute this:
 
 ```
-  python lsedataset.py ej.txt
-where the ej.txt is a filetext that it contains url for playlist or videos.
+  python lsedataset.py 
 ```
+Choose the option that you desire
+  If you select the first option, you will generate a lsedataset formed by videos, subtitles and poses of all files that`s contains in the txt youtube urls file that you had introduced
+  If you prefer the second option, you will list all paths of the dataset generated.
 
 ## Authors
 
