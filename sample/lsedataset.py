@@ -32,7 +32,7 @@ def readUrlsFile():
             urlsFile = open(name, 'r').readlines()
             valid=True
         except FileNotFoundError:
-            print("Wrong file name")
+            print("Wrong file name, try again")
     return name
  
 exit = False
