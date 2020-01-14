@@ -18,6 +18,8 @@ RUN pip3 install -r Requirements.txt
 COPY bugPytube.sh ./
 COPY mixins.py ./
 
+RUN sh bugPytube.sh
+
 RUN git clone https://github.com/CMU-Perceptual-Computing-Lab/openpose.git
 
 WORKDIR openpose
@@ -42,8 +44,6 @@ RUN cmake -DGPU_MODE:String=CPU_ONLY \
           ..
 
 RUN make -j`nproc`
-
-RUN sh bugPytube.sh
 
 RUN locale-gen es_ES.UTF-8
 ENV LANG es_ES.UTF-8
