@@ -25,6 +25,6 @@ class lsedatasetBuild:
         for f in files:
             print("Pose detection: " + f)
             os.rename(f, f.replace(" ", ""))
-            path= f.replace(" ", "").split("lsedataset\\data\\")[1]
+            path= f.replace(" ", "").split("data\\")[1]
             params= " --video "+ path +" --face --hand --write_json " + path +".json"
             call("Release\\OpenPoseDemo.exe"+params, shell=False)

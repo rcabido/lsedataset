@@ -45,6 +45,7 @@ RUN make -j`nproc`
 
 RUN sh bugPytube.sh
 
+RUN locale-gen es_ES.UTF-8
 ENV LANG es_ES.UTF-8
 ENV LANGUAGE es_ES:es
 ENV LC_ALL es_ES.UTF-8
