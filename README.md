@@ -148,6 +148,22 @@ make -j`nproc`
 
 Open the Visual Studio solution (Windows), called build/OpenPose.sln. Then, set the configuration from Debug to Release and press the green triangle icon to run it.
 
+### Installing Docker
+
+If you want to build using Nvidia Gpu:
+  1. You have to install Cuda 10 or highest in the host system
+  2. Install the nvidia docker dependencies
+      [Nvidia.docker](https://github.com/NVIDIA/nvidia-docker)
+  3. To build the image run the command:
+      docker build -t lsedataset_nvidia:latest . -f gpu.Dockerfile
+  4. To execute the container run the command:
+      docker run --runtime=nvidia -it lsedataset_nvidia:latest /bin/bash
+Else if you want to build using only CPU
+  1. To build the image run the command:
+      docker build -t lsedataset:latest . -f cpu.Dockerfile
+  2. To execute the container run the command:
+      docker run -it lsedataset:latest /bin/bash
+
 ## Deployment
 
 Tu run this project you have to go to the lsedataset directory, enter in sample folder and execute this:
