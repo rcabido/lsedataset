@@ -158,6 +158,7 @@ If you want to build using Nvidia Gpu:
       docker build -t lsedataset_nvidia:latest . -f gpu.Dockerfile
   4. To execute the container run the command:
       docker run --runtime=nvidia -it lsedataset_nvidia:latest /bin/bash
+
 Else if you want to build using only CPU
   1. To build the image run the command:
       docker build -t lsedataset:latest . -f cpu.Dockerfile
