@@ -5,8 +5,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y && \
     apt-get install -y python3-pip python3-dev
 
-RUN apt-get install wget nano apt-utils lsb-core cmake git g++ make libprotobuf-dev protobuf-compiler libopencv-dev \
+RUN apt-get install wget nano apt-utils lsb-core git g++ make libprotobuf-dev protobuf-compiler libopencv-dev \
 libgoogle-glog-dev libboost-all-dev libcaffe-cuda-dev libhdf5-dev libatlas-base-dev -y 
+
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.16.0/cmake-3.16.0-Linux-x86_64.tar.gz && \
+tar xzf cmake-3.16.0-Linux-x86_64.tar.gz -C /opt && \
+rm cmake-3.16.0-Linux-x86_64.tar.gz
+ENV PATH="/opt/cmake-3.16.0-Linux-x86_64/bin:${PATH}"
 
 RUN mkdir data
 
@@ -18,7 +23,7 @@ RUN pip3 install -r Requirements.txt
 COPY bugPytube.sh ./
 COPY mixins.py ./
 
-RUN sh bugPytube.sh
+#RUN sh bugPytube.sh
 
 RUN git clone https://github.com/CMU-Perceptual-Computing-Lab/openpose.git
 
