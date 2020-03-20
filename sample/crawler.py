@@ -14,7 +14,7 @@ class Crawler (object):
 			file= textFile.TextFile(self.fileName)
 			list=file.listUrls()
 			os.chdir("..")
-			os.chdir("data")
+			os.chdir("openpose")
 			if(not os.path.isdir("VideosTFG")):
 				os.mkdir("VideosTFG")
 			os.chdir("VideosTFG")
