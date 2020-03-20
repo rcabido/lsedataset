@@ -17,7 +17,7 @@ class lsedatasetBuild:
             os.chdir("VideosTFG")
         files = []
         # r=root, d=directories, f = files
-        for r, d, f in os.walk(cwd):
+        for r, d, f in os.walk(os.getcwd()):
             for file in f:
                 if ('.mp4' in file)|('.webm' in file):
                     files.append(os.path.join(r, file))
@@ -29,4 +29,4 @@ class lsedatasetBuild:
             params= " --video "+ path +" --face --hand --write_json " + path +".json"
             os.chdir("..")
             os.chdir("openpose")
-            call("build/examples/openpose/openpose.bin"+params, shell=False)
+            call("./build/examples/openpose/openpose.bin"+params, shell=True)
