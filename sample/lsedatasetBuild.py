@@ -13,15 +13,15 @@ class lsedatasetBuild:
 
     def buildPoses(self):
         cwd = os.getcwd()
-        if ('data' not in cwd):
-            os.chdir("..")
-            os.chdir("data")
+        if ('VideosTFG' not in cwd):
+            os.chdir("VideosTFG")
         files = []
         # r=root, d=directories, f = files
         for r, d, f in os.walk(cwd):
             for file in f:
                 if ('.mp4' in file)|('.webm' in file):
                     files.append(os.path.join(r, file))
+        os.chdir("..")
         for f in files:
             print("Pose detection: " + f)
             os.rename(f, f.replace(" ", ""))
