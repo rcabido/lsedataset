@@ -25,7 +25,7 @@ class lsedatasetBuild:
         for f in files:
             print("Pose detection: " + f)
             os.rename(f, f.replace(" ", ""))
-            path= f.replace(" ", "").split("data/")[1]
+            path= f.replace(" ", "").split("openpose/")[1]
             params= " --video "+ path +" --face --hand --write_json " + path +".json"
             os.chdir("..")
             os.chdir("openpose")
