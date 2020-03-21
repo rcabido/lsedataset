@@ -26,7 +26,7 @@ class lsedatasetBuild:
             print("Pose detection: " + f)
             os.rename(f, f.replace(" ", ""))
             path= f.replace(" ", "").split("openpose/")[1]
-            params= " --video "+ path +" --face --hand --write_json " + path +".json"
+            params= " --video "+ path +" --display 0 --render_pose 0 --face --hand --write_json " + path +".json"
             os.chdir("..")
             os.chdir("openpose")
             call("./build/examples/openpose/openpose.bin"+params, shell=True)
