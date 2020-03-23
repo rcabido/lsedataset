@@ -9,7 +9,7 @@ script = argv
 def menu():
 	print ("Choose an option")
 	print ("\t1 - Build Dataset")
-    print ("\t2 - Build Poses")
+	print ("\t2 - Build Poses")
 	print ("\t3 - Load Dataset")
 	print ("\t4 - Exit")
 
@@ -58,7 +58,7 @@ while not exit:
             exit = True
     elif option == 2:
         os.chdir("..")
-		os.chdir("openpose")
+        os.chdir("openpose")
         if(not os.path.isdir("VideosTFG")):
             print("No hay videos descargados.")
             exit = True
