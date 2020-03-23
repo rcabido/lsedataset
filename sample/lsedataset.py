@@ -9,8 +9,9 @@ script = argv
 def menu():
 	print ("Choose an option")
 	print ("\t1 - Build Dataset")
-	print ("\t2 - Load Dataset")
-	print ("\t3 - Exit")
+    print ("\t2 - Build Poses")
+	print ("\t3 - Load Dataset")
+	print ("\t4 - Exit")
 
 def chooseOption():
     valid=False
@@ -56,6 +57,16 @@ while not exit:
             build.buildPoses()
             exit = True
     elif option == 2:
+        os.chdir("..")
+		os.chdir("openpose")
+        if(not os.path.isdir("VideosTFG")):
+            print("No hay videos descargados.")
+            exit = True
+        else:
+            os.chdir("VideosTFG")
+            build.buildPoses()
+            exit = True
+    elif option == 3:
         print ("Loading dataset...")
         ######################
         #To loadPaths DataSet#
@@ -72,7 +83,7 @@ while not exit:
             file.printPaths()
         element = read.getElement()
         element.printPaths()
-    elif option == 3:
+    elif option == 4:
         print("Exiting...")
         exit = True
     else:
