@@ -37,31 +37,36 @@ class Crawler (object):
 						for htmlVideo in htmlVideos:
 							urlItem='https://www.youtube.com'+htmlVideo['href']
 							print(urlItem)
-							vid=pytube.YouTube(urlItem)
+							try:
+								vid=pytube.YouTube(urlItem)
+								vid.streams.first().download(filename=vid.title.replace(" ",""))
+								captions=vid.captions.all()
+								for cap in captions:
+									print(cap)
+								caption=vid.captions.get_by_language_code('es')
+								if (caption==None):
+									caption=vid.captions.get_by_language_code('es-ES')
+								if(caption!=None):
+									titleVideo=vid.title.replace(" ", "") 
+									subtitles=open(titleVideo+'.txt','w')
+									subtitles.write(caption.generate_srt_captions())
+									subtitles.close()
+							except Exception as e:
+								print("Video Unavailable.")
+						os.chdir("..")
+					else:
+						try:
+							vid=pytube.YouTube(item)
 							vid.streams.first().download(filename=vid.title.replace(" ",""))
-							captions=vid.captions.all()
-							for cap in captions:
-								print(cap)
 							caption=vid.captions.get_by_language_code('es')
-							if (caption==None):
-								caption=vid.captions.get_by_language_code('es-ES')
-							if(caption!=None):
-								titleVideo=vid.title.replace(" ", "") 
+							print(caption)
+							if (caption!=None):	
+								titleVideo=vid.title.replace(" ", "")
 								subtitles=open(titleVideo+'.txt','w')
 								subtitles.write(caption.generate_srt_captions())
 								subtitles.close()
-						os.chdir("..")
-					else:
-						vid=pytube.YouTube(item)
-						vid.streams.first().download(filename=vid.title.replace(" ",""))
-						caption=vid.captions.get_by_language_code('es')
-						print(caption)
-						if (caption!=None):	
-							titleVideo=vid.title.replace(" ", "")
-							subtitles=open(titleVideo+'.txt','w')
-							subtitles.write(caption.generate_srt_captions())
-							subtitles.close()
-						#print(soup)
+						except Exception as e:
+							print("Video Unavailable.")
 			else:
 				raise Exception('The file name is wrong.')
 			os.chdir("..")
