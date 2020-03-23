@@ -23,7 +23,7 @@ RUN pip3 install -r Requirements.txt
 COPY bugPytube.sh ./
 COPY mixins.py ./
 
-#RUN sh bugPytube.sh
+RUN sh bugPytube.sh
 
 RUN git clone https://github.com/CMU-Perceptual-Computing-Lab/openpose.git
 
