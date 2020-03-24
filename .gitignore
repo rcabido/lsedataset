@@ -107,4 +107,4 @@ venv.bak/
 # videos
 *.mp4
 *.webm
-/VideosTFG
+/data/VideosTFG

@@ -155,22 +155,24 @@ If you want to build using Nvidia Gpu:
   2. Install the nvidia docker dependencies
       [Nvidia.docker](https://github.com/NVIDIA/nvidia-docker)
   3. To build the image run the command:
-      docker build -t lsedataset_nvidia:latest . -f gpu.Dockerfile
-  4. To execute the container run the command:
-      docker run --runtime=nvidia -it lsedataset_nvidia:latest /bin/bash
+      docker build -t lsedataset_nvidia:latest -f gpu.Dockerfile .
+  4. Go to /lsedataset directory
+  5. To execute the container run the command:
+      docker run --gpus all --name LSEdataSet --mount type=bind,source="$(pwd)"/data,target=/openpose/VideosTFG -it lsedataset_nvidia:latest /bin/bash
 
 Else if you want to build using only CPU
   1. To build the image run the command:
-      docker build -t lsedataset:latest . -f cpu.Dockerfile
-  2. To execute the container run the command:
-      docker run -it lsedataset:latest /bin/bash
+      docker build -t lsedataset:latest -f cpu.Dockerfile .
+  2.  Go to /lsedataset directory
+  3. To execute the container run the command:
+      docker run --name LSEdataSet --mount type=bind,source="$(pwd)"/data,target=/openpose/VideosTFG -it lsedataset:latest /bin/bash
 
 ## Deployment
 
-Tu run this project you have to go to the lsedataset directory, enter in sample folder and execute this:
+Tu run this project you have to run the container with the previous commands and go to the lsedataset/sample directory, enter in sample folder and execute this:
 
 ```
-  python lsedataset.py 
+  python3 lsedataset.py 
 ```
 Choose the option that you desire
   If you select the first option, you will generate a lsedataset formed by videos, subtitles and poses of all files that`s contains in the txt youtube urls file that you had introduced
