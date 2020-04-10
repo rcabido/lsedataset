@@ -1,8 +1,9 @@
 name: LSEDataSet
 
-on: push:
+on: 
+  push:
     branches:
-        - master
+      - master
 
 jobs:
     build:
