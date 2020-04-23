@@ -108,3 +108,4 @@ venv.bak/
 *.mp4
 *.webm
 /data/VideosTFG
+/data

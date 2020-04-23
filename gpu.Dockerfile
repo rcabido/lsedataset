@@ -13,25 +13,23 @@ tar xzf cmake-3.16.0-Linux-x86_64.tar.gz -C /opt && \
 rm cmake-3.16.0-Linux-x86_64.tar.gz
 ENV PATH="/opt/cmake-3.16.0-Linux-x86_64/bin:${PATH}"
 
-RUN useradd -ms /bin/bash lse
-USER lse
-WORKDIR /home/lse
-
 COPY Requirements.txt ./
-COPY lsedataset/ lsedataset/
-
 RUN pip3 install -r Requirements.txt
+RUN rm Requirements.txt
 
 COPY bugPytube.sh ./
 COPY mixins.py ./
 
 RUN sh bugPytube.sh
+RUN rm bugPytube.sh
+
+COPY lsedataset/ lsedataset/
 
 RUN git clone https://github.com/CMU-Perceptual-Computing-Lab/openpose.git
 
 WORKDIR /openpose/build
 
-RUN cmake -D CMAKE_INSTALL_PREFIX=/usr/local  \
+RUN cmake -D CMAKE_INSTALL_PREFIX=/openpose/build \
     -D BUILD_CAFFE=ON \
     -D BUILD_EXAMPLES=ON \
     -D GPU_MODE=CUDA \
