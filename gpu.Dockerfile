@@ -13,10 +13,12 @@ tar xzf cmake-3.16.0-Linux-x86_64.tar.gz -C /opt && \
 rm cmake-3.16.0-Linux-x86_64.tar.gz
 ENV PATH="/opt/cmake-3.16.0-Linux-x86_64/bin:${PATH}"
 
-RUN mkdir data
+RUN useradd -ms /bin/bash lse
+USER lse
+WORKDIR /home/lse
 
 COPY Requirements.txt ./
-COPY sample/ sample/
+COPY lsedataset/ lsedataset/
 
 RUN pip3 install -r Requirements.txt
 

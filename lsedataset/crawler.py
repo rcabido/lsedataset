@@ -9,7 +9,6 @@ class Crawler (object):
 		self.fileName=filename
 
 	def crawl(self):
-		print(self.fileName)
 		if(self.fileName!=None):
 			file= textFile.TextFile(self.fileName)
 			list=file.listUrls()
@@ -28,7 +27,6 @@ class Crawler (object):
 					if (len(playlist)<1):
 						isPlaylist=False
 					if (isPlaylist):
-						print(isPlaylist)
 						titlePlaylist=soup.find_all('h3',"playlist-title")[0].contents[1].string
 						if(os.path.exists(titlePlaylist.replace(" ", "") )!=True):
 							os.mkdir(titlePlaylist.replace(" ", "") )
@@ -36,17 +34,16 @@ class Crawler (object):
 						os.chdir(titlePlaylist.replace(" ", ""))
 						for htmlVideo in htmlVideos:
 							urlItem='https://www.youtube.com'+htmlVideo['href']
-							print(urlItem)
+							print("Downloading " + urlItem + "...")
 							try:
 								vid=pytube.YouTube(urlItem)
 								vid.streams.first().download(filename=vid.title.replace(" ",""))
 								captions=vid.captions.all()
-								for cap in captions:
-									print(cap)
 								caption=vid.captions.get_by_language_code('es')
 								if (caption==None):
 									caption=vid.captions.get_by_language_code('es-ES')
 								if(caption!=None):
+									print("Saving the captions of " + vid.title)
 									titleVideo=vid.title.replace(" ", "") 
 									subtitles=open(titleVideo+'.txt','w')
 									subtitles.write(caption.generate_srt_captions())
@@ -57,10 +54,13 @@ class Crawler (object):
 					else:
 						try:
 							vid=pytube.YouTube(item)
+							print("Downloading " + item + "...")
 							vid.streams.first().download(filename=vid.title.replace(" ",""))
 							caption=vid.captions.get_by_language_code('es')
-							print(caption)
-							if (caption!=None):	
+							if (caption==None):
+								caption=vid.captions.get_by_language_code('es-ES')
+							if (caption!=None):
+								print("Saving the captions of " + vid.title)
 								titleVideo=vid.title.replace(" ", "")
 								subtitles=open(titleVideo+'.txt','w')
 								subtitles.write(caption.generate_srt_captions())

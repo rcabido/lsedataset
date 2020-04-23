@@ -7,11 +7,12 @@ import os
 script = argv
 
 def menu():
-	print ("Choose an option")
-	print ("\t1 - Build Dataset")
-	print ("\t2 - Build Poses")
-	print ("\t3 - Load Dataset")
-	print ("\t4 - Exit")
+    print ("Choose an option")
+    print ("\t1 - Build Dataset")
+    print ("\t2 - Build Poses")
+    print ("\t3 - List Dataset")
+    print ("\t4 - Search File")
+    print ("\t5 - Exit")
 
 def chooseOption():
     valid=False
@@ -54,7 +55,7 @@ while not exit:
             fileName = readUrlsFile()
             build = lsedatasetBuild.lsedatasetBuild(fileName)
             build.download()
-            build.buildPoses()
+            #build.buildPoses()
             exit = True
     elif option == 2:
         os.chdir("..")
@@ -73,17 +74,26 @@ while not exit:
         ######################
 
         cwd = os.getcwd()
-        if ('sample' in cwd):
+        if ('lsedataset' in cwd):
             os.chdir("..")
-            os.chdir("data")
+            os.chdir("openpose/VideosTFG")
             cwd = os.getcwd()
         read = lsedatasetRead.lsedatasetRead(cwd)
         data = read.load()
         for file in data:
             file.printPaths()
-        element = read.getElement()
-        element.printPaths()
     elif option == 4:
+        cwd = os.getcwd()
+        if ('lsedataset' in cwd):
+            os.chdir("..")
+            os.chdir("openpose/VideosTFG")
+            cwd = os.getcwd()
+        read = lsedatasetRead.lsedatasetRead(cwd)
+        data = read.load()
+        element = read.getElement()
+        if (element != None):
+            element.printPaths()
+    elif option == 5:
         print("Exiting...")
         exit = True
     else:

@@ -8,6 +8,7 @@ class TextFile(object):
             mesage=f.readlines()
             f.close()
             list=[]
+            print("Reading file "+ self.fileName +"...")
             for linea in mesage:
                 l=linea.rstrip('\n')
                 print(l)

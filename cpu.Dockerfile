@@ -8,10 +8,12 @@ RUN apt-get update -y && \
 RUN apt-get install wget apt-utils lsb-core cmake git -y && \
     apt-get install libopencv-dev -y 
 
-RUN mkdir data
+RUN useradd -ms /bin/bash lse
+USER lse
+WORKDIR /home/lse
 
 COPY Requirements.txt ./
-COPY sample/ sample/
+COPY lsedataset/ lsedataset/
 
 RUN pip3 install -r Requirements.txt
 
