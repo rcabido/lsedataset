@@ -12,7 +12,8 @@ def menu():
     print ("\t2 - Build Poses")
     print ("\t3 - List Dataset")
     print ("\t4 - Search File")
-    print ("\t5 - Exit")
+    print ("\t5 - Data Set")
+    print ("\t6 - Exit")
 
 def chooseOption():
     valid=False
@@ -94,6 +95,10 @@ while not exit:
         if (element != None):
             element.printPaths()
     elif option == 5:
+        save = dataset.dataset()
+        save.hello()
+        exit = True
+    elif option == 6:
         print("Exiting...")
         exit = True
     else:
