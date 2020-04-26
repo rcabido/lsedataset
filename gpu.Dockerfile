@@ -27,7 +27,6 @@ sudo rm cmake-3.16.0-Linux-x86_64.tar.gz
 
 ENV PATH="/opt/cmake-3.16.0-Linux-x86_64/bin:${PATH}"
 
-COPY lsedataset/ lsedataset/
 RUN sudo git clone https://github.com/CMU-Perceptual-Computing-Lab/openpose.git
 
 WORKDIR /openpose/build
@@ -52,7 +51,7 @@ ENV LANGUAGE es_ES:es
 ENV LC_ALL es_ES.UTF-8
 
 WORKDIR ../../
-RUN sudo chmod -R ugo+rwx openpose && sudo chmod -R ugo+rwx lsedataset
+COPY lsedataset/ lsedataset/
 WORKDIR lsedataset/
 USER root
 ENTRYPOINT ["python3"]
