@@ -13,8 +13,10 @@ def menu():
     print ("\t2 - Build Poses")
     print ("\t3 - List Dataset")
     print ("\t4 - Search File")
-    print ("\t5 - Data Set")
-    print ("\t6 - Exit")
+    print ("\t7 - Data Set")
+    print ("\t5 - Insert")
+    print ("\t6 - Get")
+    print ("\t8 - Exit")
 
 def chooseOption():
     valid=False
@@ -57,7 +59,7 @@ while not exit:
             fileName = readUrlsFile()
             build = lsedatasetBuild.lsedatasetBuild(fileName)
             build.download()
-            #build.buildPoses()
+            build.buildPoses()
             exit = True
     elif option == 2:
         os.chdir("..")
@@ -96,10 +98,19 @@ while not exit:
         if (element != None):
             element.printPaths()
     elif option == 5:
-        save = dataset.dataset()
+        save = dataset.DataSet()
+        name = input("Enter the name of the field: ")
+        value = input("Enter the value of the field: ")
+        save.insert(name,value)
+    elif option == 6:
+        save = dataset.DataSet()
+        name = input("Enter the name of the field: ")
+        save.getValue(name)
+    elif option == 7:
+        save = dataset.DataSet()
         save.hello()
         exit = True
-    elif option == 6:
+    elif option == 8:
         print("Exiting...")
         exit = True
     else:
