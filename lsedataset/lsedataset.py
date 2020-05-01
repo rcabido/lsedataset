@@ -11,11 +11,11 @@ def menu():
     print ("Choose an option")
     print ("\t1 - Build Dataset")
     print ("\t2 - Build Poses")
-    print ("\t3 - List Dataset")
-    print ("\t4 - Search File")
-    print ("\t7 - Data Set")
-    print ("\t5 - Insert")
-    print ("\t6 - Get")
+    print ("\t3 - Build Dataset since a key-word-search")
+    print ("\t4 - List Dataset")
+    print ("\t5 - Search File")
+    print ("\t6 - Insert")
+    print ("\t7 - Get")
     print ("\t8 - Exit")
 
 def chooseOption():
@@ -64,7 +64,7 @@ while not exit:
     elif option == 2:
         build.buildAllPoses()
         exit = True
-    elif option == 3:
+    elif option == 4:
         print ("Loading dataset...")
         ######################
         #To loadPaths DataSet#
@@ -75,25 +75,26 @@ while not exit:
         data = read.load()
         for file in data:
             file.printPaths()
-    elif option == 4:
+    elif option == 5:
         cwd = os.getcwd()
         read = lsedatasetRead.lsedatasetRead(cwd)
         data = read.load()
         element = read.getElement()
         if (element != None):
             element.printPaths()
-    elif option == 5:
+    elif option == 6:
         save = dataset.DataSet()
         name = input("Enter the name of the field: ")
         value = input("Enter the value of the field: ")
         save.insert(name,value)
-    elif option == 6:
+    elif option == 7:
         save = dataset.DataSet()
         name = input("Enter the name of the field: ")
         save.getValue(name)
-    elif option == 7:
-        save = dataset.DataSet()
-        save.hello()
+    elif option == 3:
+        search = input("Enter the name to the search: ")
+        build = lsedatasetBuild.lsedatasetBuild(search)
+        build.downloadSearch()
         exit = True
     elif option == 8:
         print("Exiting...")

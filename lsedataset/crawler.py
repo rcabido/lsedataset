@@ -35,12 +35,11 @@ class Crawler (object):
 		else:
 			raise Exception('The number of params is wrong.')
 
-	def searchVideos():
-		search = input("Enter the name to the search: ")
+	def searchVideos(self):
 		base='https://www.youtube.com/results?search_query='
-		if (search!=None):
-			print('Searching to %s'%search)
-			req= requests.get(base+search)
+		if (self.fileName!=None):
+			print('Searching to %s'%self.fileName)
+			req= requests.get(base+self.fileName)
 			pageSearch=req.text
 			#This is all html that appears in this searchpage
 			soup=scrap(pageSearch,'html.parser')
@@ -69,7 +68,8 @@ class Crawler (object):
 				subtitles.close()
 			return os.getcwd() + "/" + titleVideo + '.mp4'
 		except Exception as e:
-			print(e)			
+			print("Video Unavailable.")
+			return None	
 
 
 
