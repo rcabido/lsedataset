@@ -43,7 +43,7 @@ def readUrlsFile():
  
 exit = False
 option = 0
- 
+os.chdir("../openpose/VideosTFG")
 while not exit:
  
     menu()
@@ -58,19 +58,12 @@ while not exit:
         while not exit:
             fileName = readUrlsFile()
             build = lsedatasetBuild.lsedatasetBuild(fileName)
-            build.download()
-            build.buildPoses()
+            build.downloadFile()
+            #build.buildAllPoses()
             exit = True
     elif option == 2:
-        os.chdir("..")
-        os.chdir("openpose")
-        if(not os.path.isdir("VideosTFG")):
-            print("No hay videos descargados.")
-            exit = True
-        else:
-            os.chdir("VideosTFG")
-            build.buildPoses()
-            exit = True
+        build.buildAllPoses()
+        exit = True
     elif option == 3:
         print ("Loading dataset...")
         ######################
@@ -78,20 +71,12 @@ while not exit:
         ######################
 
         cwd = os.getcwd()
-        if ('lsedataset' in cwd):
-            os.chdir("..")
-            os.chdir("openpose/VideosTFG")
-            cwd = os.getcwd()
         read = lsedatasetRead.lsedatasetRead(cwd)
         data = read.load()
         for file in data:
             file.printPaths()
     elif option == 4:
         cwd = os.getcwd()
-        if ('lsedataset' in cwd):
-            os.chdir("..")
-            os.chdir("openpose/VideosTFG")
-            cwd = os.getcwd()
         read = lsedatasetRead.lsedatasetRead(cwd)
         data = read.load()
         element = read.getElement()

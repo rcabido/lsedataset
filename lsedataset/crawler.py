@@ -8,15 +8,11 @@ class Crawler (object):
 	def __init__(self,filename):
 		self.fileName=filename
 
-	def crawl(self):
+	def crawlFile(self):
+		videos = []
 		if(self.fileName!=None):
 			file= textFile.TextFile(self.fileName)
 			list=file.listUrls()
-			os.chdir("..")
-			os.chdir("openpose")
-			if(not os.path.isdir("VideosTFG")):
-				os.mkdir("VideosTFG")
-			os.chdir("VideosTFG")
 			if(len(list)>0):
 				for item in list:
 					req=requests.get(item)
@@ -28,50 +24,52 @@ class Crawler (object):
 						isPlaylist=False
 					if (isPlaylist):
 						titlePlaylist=soup.find_all('h3',"playlist-title")[0].contents[1].string
-						if(os.path.exists(titlePlaylist.replace(" ", "") )!=True):
-							os.mkdir(titlePlaylist.replace(" ", "") )
 						htmlVideos=soup.find_all('a',"playlist-video")
-						os.chdir(titlePlaylist.replace(" ", ""))
 						for htmlVideo in htmlVideos:
-							urlItem='https://www.youtube.com'+htmlVideo['href']
-							print("Downloading " + urlItem + "...")
-							try:
-								vid=pytube.YouTube(urlItem)
-								vid.streams.first().download(filename=vid.title.replace(" ",""))
-								captions=vid.captions.all()
-								caption=vid.captions.get_by_language_code('es')
-								if (caption==None):
-									caption=vid.captions.get_by_language_code('es-ES')
-								if(caption!=None):
-									print("Saving the captions of " + vid.title)
-									titleVideo=vid.title.replace(" ", "") 
-									subtitles=open(titleVideo+'.txt','w')
-									subtitles.write(caption.generate_srt_captions())
-									subtitles.close()
-							except Exception as e:
-								print("Video Unavailable.")
-						os.chdir("..")
+							videos.append('https://www.youtube.com'+htmlVideo['href'])
 					else:
-						try:
-							vid=pytube.YouTube(item)
-							print("Downloading " + item + "...")
-							vid.streams.first().download(filename=vid.title.replace(" ",""))
-							caption=vid.captions.get_by_language_code('es')
-							if (caption==None):
-								caption=vid.captions.get_by_language_code('es-ES')
-							if (caption!=None):
-								print("Saving the captions of " + vid.title)
-								titleVideo=vid.title.replace(" ", "")
-								subtitles=open(titleVideo+'.txt','w')
-								subtitles.write(caption.generate_srt_captions())
-								subtitles.close()
-						except Exception as e:
-							print("Video Unavailable.")
+						videos.append(item)
+				return videos
 			else:
 				raise Exception('The file name is wrong.')
-			os.chdir("..")
 		else:
 			raise Exception('The number of params is wrong.')
+
+	def searchVideos():
+		search = input("Enter the name to the search: ")
+		base='https://www.youtube.com/results?search_query='
+		if (search!=None):
+			print('Searching to %s'%search)
+			req= requests.get(base+search)
+			pageSearch=req.text
+			#This is all html that appears in this searchpage
+			soup=scrap(pageSearch,'html.parser')
+			urlVideos=soup.find_all('a',class_="yt-uix-tile-link")
+			listUrlVideos=[]
+			for video in urlVideos:
+				item='https://www.youtube.com'+video['href']
+				listUrlVideos.append(item)
+			return listUrlVideos
+		else:
+			print('The number of params is wrong.');
+
+	def downloadItem(item):
+		try:
+			vid=pytube.YouTube(item)
+			print("Downloading " + item + "...")
+			titleVideo=vid.title.replace(" ", "").replace("/","")
+			vid.streams.filter(progressive=True, file_extension='mp4').first().download(filename=titleVideo)
+			caption=vid.captions.get_by_language_code('es')
+			if (caption==None):
+				caption=vid.captions.get_by_language_code('es-ES')
+			if (caption!=None):
+				print("Saving the captions of " + vid.title)
+				subtitles=open(titleVideo+'.txt','w')
+				subtitles.write(caption.generate_srt_captions())
+				subtitles.close()
+			return os.getcwd() + "/" + titleVideo + '.mp4'
+		except Exception as e:
+			print(e)			
 
 
 

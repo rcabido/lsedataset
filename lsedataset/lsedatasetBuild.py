@@ -7,14 +7,16 @@ class lsedatasetBuild:
     def __init__(self, fileNameUrls):
         self.fileNameUrls = fileNameUrls
 
-    def download(self):
+    def downloadFile(self):
         crawl= crawler.Crawler(self.fileNameUrls)
-        crawl.crawl()
+        lista = crawl.crawlFile()
+        print(lista)
+        for video in lista:
+            aux = crawler.Crawler.downloadItem(video)
+            lsedatasetBuild.buildPoseFile(aux)
 
-    def buildPoses(self):
+    def buildAllPoses(self):
         cwd = os.getcwd()
-        if ('VideosTFG' not in cwd):
-            os.chdir("VideosTFG")
         files = []
         # r=root, d=directories, f = files
         for r, d, f in os.walk(os.getcwd()):
@@ -27,6 +29,14 @@ class lsedatasetBuild:
             os.rename(f, f.replace(" ", ""))
             path= f.replace(" ", "").split("openpose/")[1]
             params= " --video "+ path +" --display 0 --render_pose 0 --face --hand --write_json " + path +".json"
-            os.chdir("..")
-            os.chdir("openpose")
             call("./build/examples/openpose/openpose.bin"+params, shell=True)
+        os.chdir("VideosTFG")
+
+    def buildPoseFile(f):
+        os.chdir("..")
+        print("Pose detection: " + f)
+        os.rename(f, f.replace(" ", ""))
+        path= f.replace(" ", "").split("openpose/")[1]
+        params= " --video "+ path +" --display 0 --render_pose 0 --face --hand --write_json " + path +".json"
+        call("./build/examples/openpose/openpose.bin"+params, shell=True)
+        os.chdir("VideosTFG")
