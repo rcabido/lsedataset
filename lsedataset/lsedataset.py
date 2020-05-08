@@ -4,6 +4,7 @@ import lsedata
 import dataset
 from sys import argv
 import os
+import videoStruct
 
 script = argv
 
@@ -16,7 +17,8 @@ def menu():
     print ("\t5 - Search File")
     print ("\t6 - Insert")
     print ("\t7 - Get")
-    print ("\t8 - Exit")
+    print ("\t8 - Load Chapters")
+    print ("\t9 - Exit")
 
 def chooseOption():
     valid=False
@@ -36,6 +38,18 @@ def readUrlsFile():
         try:
             name = input("Enter the name of the file: ")
             urlsFile = open(name, 'r').readlines()
+            valid=True
+        except FileNotFoundError:
+            print("Wrong file name, try again")
+    return name
+
+def readTriplet():
+    valid=False
+    name=""
+    while(not valid):
+        try:
+            name = input("Enter the name of the file: ")
+            urlsFile = open(name + '.txt', 'r').readlines()
             valid=True
         except FileNotFoundError:
             print("Wrong file name, try again")
@@ -64,6 +78,11 @@ while not exit:
     elif option == 2:
         build.buildAllPoses()
         exit = True
+    elif option == 3:
+        search = input("Enter the name to the search: ")
+        build = lsedatasetBuild.lsedatasetBuild(search)
+        build.downloadSearch()
+        exit = True
     elif option == 4:
         print ("Loading dataset...")
         ######################
@@ -91,12 +110,14 @@ while not exit:
         save = dataset.DataSet()
         name = input("Enter the name of the field: ")
         save.getValue(name)
-    elif option == 3:
-        search = input("Enter the name to the search: ")
-        build = lsedatasetBuild.lsedatasetBuild(search)
-        build.downloadSearch()
-        exit = True
     elif option == 8:
+        fileName = readTriplet()
+        videoStructure = videoStruct.VideoStruct(fileName)
+        listWords = videoStructure.convertChapters()
+        listWords = videoStructure.addVideoClips(listWords)
+        print(videoStructure.addPoses(listWords)[0])
+        #videoStructure.addPoses(listWords)
+    elif option == 9:
         print("Exiting...")
         exit = True
     else:
@@ -104,17 +125,3 @@ while not exit:
  
 print ("Terminated")
 
-
-#build = lsedatasetBuild.lsedatasetBuild(fileName)
-#build.download()
-#build.buildPoses()
-
-#cwd = os.getcwd()
-#        if ('sample' in cwd):
-#            os.chdir("..")
-#            os.chdir("data")
-#            cwd = os.getcwd()
-#        read = lsedatasetRead.lsedatasetRead(cwd)
-#        data = read.load()
-#        for file in data:
-#            file.printPaths()
