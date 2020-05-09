@@ -39,3 +39,11 @@ class DataSet (object):
             print(item)
         except Exception as e:
             print(e)
+
+    def listWords(self):
+        try:
+            r = redis.StrictRedis(host=self.redis_host, port=self.redis_port, password=self.redis_password, decode_responses=True)
+            item = r.scan_iter("*")
+            print(item)
+        except Exception as e:
+            print(e)
