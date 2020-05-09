@@ -15,13 +15,14 @@ class lsedatasetRead:
                         subtitle = os.path.join(r, file).replace('.mp4','.txt')
                     else:
                         subtitle = os.path.join(r, file).replace('.webm','.txt')
+                    video = os.path.join(r, file)
                     posesPath = os.path.join(r, file) + '.json'
                     posesFiles = []
                     for rjson, djson, fjson in os.walk(posesPath):
                         for filejson in fjson:
                             if ('.json' in filejson):
                                 posesFiles.append(os.path.join(rjson,filejson))
-                    aux = lsedata.Lsedata(os.path.join(r, file),subtitle,posesFiles)
+                    aux = lsedata.Lsedata(video,subtitle,posesFiles)
                     data.append(aux)
         return data
 
@@ -33,7 +34,7 @@ class lsedatasetRead:
             for file in f:
                 if ('.mp4' in file)|('.webm' in file):
                     if (name in file):
-                        print( os.path.join(r, file))
+                        video = os.path.join(r, file)
                         if ('.mp4' in file):
                             subtitle = os.path.join(r, file).replace('.mp4','.txt')
                         else:
@@ -44,7 +45,7 @@ class lsedatasetRead:
                             for filejson in fjson:
                                 if ('.json' in filejson):
                                     posesFiles.append(os.path.join(rjson,filejson))
-                        aux = lsedata.Lsedata(os.path.join(r, file),subtitle,posesFiles)
+                        aux = lsedata.Lsedata(video,subtitle,posesFiles)
                         notvalid=False
                         return aux
         if (notvalid):
