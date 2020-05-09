@@ -103,9 +103,7 @@ while not exit:
             element.printPaths()
     elif option == 6:
         save = dataset.DataSet()
-        name = input("Enter the name of the field: ")
-        value = input("Enter the value of the field: ")
-        save.insert(name,value)
+        save.listWords()
     elif option == 7:
         save = dataset.DataSet()
         name = input("Enter the name of the field: ")

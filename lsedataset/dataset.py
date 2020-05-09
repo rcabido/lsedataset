@@ -28,7 +28,7 @@ class DataSet (object):
         try:
             r = redis.StrictRedis(host=self.redis_host, port=self.redis_port, password=self.redis_password, decode_responses=True)
             for item in wordsList:
-                r.hmset(item['word'], item)
+                r.hmset(item['word'],item)
         except Exception as e:
             print(e)
 
@@ -43,7 +43,7 @@ class DataSet (object):
     def listWords(self):
         try:
             r = redis.StrictRedis(host=self.redis_host, port=self.redis_port, password=self.redis_password, decode_responses=True)
-            item = r.scan_iter("*")
+            item = r.keys('*')
             print(item)
         except Exception as e:
             print(e)
