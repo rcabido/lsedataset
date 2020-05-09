@@ -16,6 +16,6 @@ class Lsedata(object):
             print(file)
 
     def printName(self):
-        video = self.Video.split("/")
+        video = self.video.split("/")
         videoName = video[len(video)-1].replace(".mp4", "")
-        print(video)
+        print(videoName)
