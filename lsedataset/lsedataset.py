@@ -93,16 +93,16 @@ while not exit:
         build.downloadSearch()
         
     elif option == 4:
-        ######################
-        #To loadPaths DataSet#
-        ######################
+        ###############################
+        #To print local videos DataSet#
+        ###############################
 
         print ("Loading dataset...")
         cwd = os.getcwd()
         read = lsedatasetRead.lsedatasetRead(cwd)
         data = read.load()
         for file in data:
-            file.printPaths()
+            file.printName()
 
     elif option == 5:
         ########################
@@ -114,7 +114,7 @@ while not exit:
         data = read.load()
         element = read.getElement()
         if (element != None):
-            element.printPaths()
+            element.printName()
 
     elif option == 6:
         ########################

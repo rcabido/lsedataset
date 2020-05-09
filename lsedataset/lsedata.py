@@ -14,3 +14,8 @@ class Lsedata(object):
             print('Poses:')
         for file in self.poses:
             print(file)
+
+    def printName(self):
+        video = self.Video.split("/")
+        videoName = video[len(video)-1].replace(".mp4", "")
+        print(video)
