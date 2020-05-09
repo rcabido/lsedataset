@@ -10,15 +10,15 @@ script = argv
 
 def menu():
     print ("Choose an option")
-    print ("\t1 - Build dataset since a file text")
-    print ("\t2 - Build poses of local videos")
-    print ("\t3 - Build dataset since a key-word-search")
-    print ("\t4 - List local dataset")
-    print ("\t5 - Search path local files")
-    print ("\t6 - List words in Data Base")
-    print ("\t7 - Get word info")
-    print ("\t8 - Insert video in Data Base")
-    print ("\t9 - Delete word in Data Base")
+    print ("\t1  - Build dataset since a file text")
+    print ("\t2  - Build poses of local videos")
+    print ("\t3  - Build dataset since a key-word-search")
+    print ("\t4  - List local video dataset")
+    print ("\t5  - Search path local video")
+    print ("\t6  - List words in Data Base")
+    print ("\t7  - Get word info")
+    print ("\t8  - Insert video in Data Base")
+    print ("\t9  - Delete word in Data Base")
     print ("\t10 - Exit")
 
 def chooseOption():
@@ -32,28 +32,22 @@ def chooseOption():
             print('Option wrong, try again')
     return num
 
-def readUrlsFile():
-    valid=False
+def readTriplet():
     name=""
-    while(not valid):
-        try:
-            name = input("Enter the name of the file: ")
-            urlsFile = open(name, 'r').readlines()
-            valid=True
-        except FileNotFoundError:
-            print("Wrong file name, try again")
+    try:
+        name = input("Enter the name of the video: ")
+        urlsFile = open(name, 'r').readlines()
+    except FileNotFoundError:
+        print("Wrong file name, try again")
     return name
 
-def readTriplet():
-    valid=False
+def readUrlsFile():
     name=""
-    while(not valid):
-        try:
-            name = input("Enter the name of the file: ")
-            urlsFile = open(name + '.txt', 'r').readlines()
-            valid=True
-        except FileNotFoundError:
-            print("Wrong file name, try again")
+    try:
+        name = input("Enter the name of the file: ")
+        urlsFile = open(name + '.txt', 'r').readlines()
+    except FileNotFoundError:
+        print("Wrong file name, try again")
     return name
  
 exit = False
@@ -81,6 +75,7 @@ while not exit:
         ###################
 
         print ("Building poses...")
+        build = lsedatasetBuild.lsedatasetBuild("local")
         build.buildAllPoses()
         
     elif option == 3:
@@ -114,7 +109,7 @@ while not exit:
         data = read.load()
         element = read.getElement()
         if (element != None):
-            element.printName()
+            element.printPaths()
 
     elif option == 6:
         ########################
