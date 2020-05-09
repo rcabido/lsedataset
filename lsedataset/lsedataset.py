@@ -109,13 +109,15 @@ while not exit:
     elif option == 7:
         save = dataset.DataSet()
         name = input("Enter the name of the field: ")
-        save.getValue(name)
+        save.getWord(name)
     elif option == 8:
         fileName = readTriplet()
         videoStructure = videoStruct.VideoStruct(fileName)
         listWords = videoStructure.convertChapters()
         listWords = videoStructure.addVideoClips(listWords)
-        print(videoStructure.addPoses(listWords)[0])
+        listWords = videoStructure.addPoses(listWords)
+        save = dataset.DataSet()
+        save.insertVideo(listWords)
         #videoStructure.addPoses(listWords)
     elif option == 9:
         print("Exiting...")
