@@ -50,6 +50,8 @@ ENV LANG es_ES.UTF-8
 ENV LANGUAGE es_ES:es
 ENV LC_ALL es_ES.UTF-8
 
+RUN sudo apt-get update && \
+    sudo apt-get -y install ffmpeg
 WORKDIR ../../
 COPY lsedataset/ lsedataset/
 WORKDIR lsedataset/
