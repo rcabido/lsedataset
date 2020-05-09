@@ -10,15 +10,16 @@ script = argv
 
 def menu():
     print ("Choose an option")
-    print ("\t1 - Build Dataset")
-    print ("\t2 - Build Poses")
-    print ("\t3 - Build Dataset since a key-word-search")
-    print ("\t4 - List Dataset")
-    print ("\t5 - Search File")
-    print ("\t6 - Insert")
-    print ("\t7 - Get")
-    print ("\t8 - Load Chapters")
-    print ("\t9 - Exit")
+    print ("\t1 - Build dataset since a file text")
+    print ("\t2 - Build poses of local videos")
+    print ("\t3 - Build dataset since a key-word-search")
+    print ("\t4 - List local dataset")
+    print ("\t5 - Search path local files")
+    print ("\t6 - List words in Data Base")
+    print ("\t7 - Get word info")
+    print ("\t8 - Insert video in Data Base")
+    print ("\t9 - Delete word in Data Base")
+    print ("\t10 - Exit")
 
 def chooseOption():
     valid=False
@@ -65,50 +66,78 @@ while not exit:
     option = chooseOption()
  
     if option == 1:
+        ###################################
+        #To build the DataSet since a file#
+        ###################################
+
         print ("Building dataset...")
-        ######################
-        #To build the DataSet#
-        ######################
-        while not exit:
-            fileName = readUrlsFile()
-            build = lsedatasetBuild.lsedatasetBuild(fileName)
-            build.downloadFile()
-            #build.buildAllPoses()
-            exit = True
+        fileName = readUrlsFile()
+        build = lsedatasetBuild.lsedatasetBuild(fileName)
+        build.downloadFile()
+
     elif option == 2:
+        ###################
+        #To capt all poses#
+        ###################
+
+        print ("Building poses...")
         build.buildAllPoses()
-        exit = True
+        
     elif option == 3:
+        #####################################
+        #To build the DataSet since a Search#
+        #####################################
+
         search = input("Enter the name to the search: ")
         build = lsedatasetBuild.lsedatasetBuild(search)
         build.downloadSearch()
-        exit = True
+        
     elif option == 4:
-        print ("Loading dataset...")
         ######################
         #To loadPaths DataSet#
         ######################
 
+        print ("Loading dataset...")
         cwd = os.getcwd()
         read = lsedatasetRead.lsedatasetRead(cwd)
         data = read.load()
         for file in data:
             file.printPaths()
+
     elif option == 5:
+        ########################
+        #To print local DataSet#
+        ########################
+
         cwd = os.getcwd()
         read = lsedatasetRead.lsedatasetRead(cwd)
         data = read.load()
         element = read.getElement()
         if (element != None):
             element.printPaths()
+
     elif option == 6:
+        ########################
+        #List words in DataBase#
+        ########################
+
         save = dataset.DataSet()
         save.listWords()
+
     elif option == 7:
+        #########################
+        #Search word in DataBase#
+        #########################
+
         save = dataset.DataSet()
         name = input("Enter the name of the field: ")
         save.getWord(name)
+
     elif option == 8:
+        ##########################
+        #Insert video in DataBase#
+        ##########################
+
         fileName = readTriplet()
         videoStructure = videoStruct.VideoStruct(fileName)
         listWords = videoStructure.convertChapters()
@@ -116,10 +145,24 @@ while not exit:
         listWords = videoStructure.addPoses(listWords)
         save = dataset.DataSet()
         save.insertVideo(listWords)
-        #videoStructure.addPoses(listWords)
+
     elif option == 9:
+        #########################
+        #Delete word in DataBase#
+        #########################
+
+        save = dataset.DataSet()
+        name = input("Enter the name of the field: ")
+        save.deleteWord(name)
+
+    elif option == 10:
+        #########
+        #Exiting#
+        #########
+
         print("Exiting...")
         exit = True
+
     else:
         print ("Choose a correct option, try again")
  
