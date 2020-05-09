@@ -57,12 +57,12 @@ class VideoStruct(object):
                 for item in wordsList:
                     h, m, s = item['start'].split(":")
                     s = s.split(",")
-                    start = int(h)*3600 + int(m)*60 + int(int(s[1])*0.25) + int(s[0])
+                    start = int(h)*3600 + int(m)*60 + int(s[0])
                     he, me, se = item['end'].split(":")
                     se = se.split(",")
-                    end = int(he)*3600 + int(me)*60 - int(int(se[1])*0.25) + int(se[0])
-                    i = start*25
-                    j = end*25
+                    end = int(he)*3600 + int(me)*60 + int(se[0])
+                    i = (start*25) + int(int(s[1])*0.25)
+                    j = (end*25) + int(int(se[1])*0.25)
                     aux = len(str(i))
                     pathBase = self.fileName + "_"
                     while aux < 12:
