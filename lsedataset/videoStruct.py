@@ -41,7 +41,7 @@ class VideoStruct(object):
                     s = open(self.fileName + item['word'] + ".mp4", "rb")
                     e = base64.b64encode(s.read())
                     s.close()
-                    item['video'] = e
+                    item['video'] = e.decode('utf-8')
                     os.remove(self.fileName + item['word'] + ".mp4")
                 sys.stdout = old_stdout
                 devnull.close()  

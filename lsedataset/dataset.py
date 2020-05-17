@@ -1,5 +1,5 @@
 import redis
-
+import json
 
 
 
@@ -29,7 +29,12 @@ class DataSet (object):
             r = redis.StrictRedis(host=self.redis_host, port=self.redis_port, password=self.redis_password, decode_responses=True)
             for item in wordsList:
                 print("Adding " + item['word'] + "...")
-                r.hmset(item['word'],item)
+                if(r.exists(item['word'])):
+                    index=len(r.hkeys(item['word']))
+                    word={index:json.dumps(item)}
+                else:
+                    word={0:json.dumps(item)}
+                r.hmset(item['word'],word)
         except Exception as e:
             print(e)
 
@@ -54,5 +59,13 @@ class DataSet (object):
             r = redis.StrictRedis(host=self.redis_host, port=self.redis_port, password=self.redis_password, decode_responses=True)
             item = r.delete(search)
             print("Removing " + search + "...")
+        except Exception as e:
+            print(e)
+
+    def searchWords(self, search):
+        try:
+            r = redis.StrictRedis(host=self.redis_host, port=self.redis_port, password=self.redis_password, decode_responses=True)
+            item = r.keys(search + '*')
+            print(item)
         except Exception as e:
             print(e)
