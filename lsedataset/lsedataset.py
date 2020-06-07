@@ -138,11 +138,11 @@ while not exit:
 
         fileName = readTriplet()
         if (fileName != ""):
-            name = input("Do you want to use Stop Words filter? Y/N")
+            name = input("Do you want to use Stop Words filter? Y/N ")
             if (name == 'Y'):
-                videoStructure = videoStruct.VideoStruct(fileName, true)
+                videoStructure = videoStruct.VideoStruct(fileName, True)
             else:
-                videoStructure = videoStruct.VideoStruct(fileName, false)
+                videoStructure = videoStruct.VideoStruct(fileName, False)
             listWords = videoStructure.convertChapters()
             listWords = videoStructure.addVideoClips(listWords)
             listWords = videoStructure.addPoses(listWords)

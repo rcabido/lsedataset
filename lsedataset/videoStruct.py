@@ -3,7 +3,7 @@ import base64
 import os, sys
 
 class VideoStruct(object):
-    def __init__(self,filename, filter):
+    def __init__(self,filename,filter):
         self.fileName=filename
         self.filter=filter
         if (self.filter):
@@ -39,11 +39,11 @@ class VideoStruct(object):
                                         list.append(triplet)
                             else:
                                 if (self.filter):
-                                    if (word.lower() not in self.wordsFilter):
-                                        triplet['word'] = word.lower()
+                                    if (l.lower() not in self.wordsFilter):
+                                        triplet['word'] = l.lower()
                                         list.append(triplet)
                                 else:
-                                    triplet['word'] = word.lower()
+                                    triplet['word'] = l.lower()
                                     list.append(triplet)
             return list
         else:
