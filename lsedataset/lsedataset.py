@@ -36,9 +36,10 @@ def readTriplet():
     name=""
     try:
         name = input("Enter the name of the video: ")
-        urlsFile = open(name, 'r').readlines()
+        urlsFile = open(name + '.txt', 'r').readlines()
     except FileNotFoundError:
         print("Wrong file name, try again")
+        name = ""
     return name
 
 def readUrlsFile():
@@ -47,6 +48,7 @@ def readUrlsFile():
         name = input("Enter the name of the file: ")
         urlsFile = open(name + '.txt', 'r').readlines()
     except FileNotFoundError:
+        name = ""
         print("Wrong file name, try again")
     return name
  
@@ -66,8 +68,9 @@ while not exit:
 
         print ("Building dataset...")
         fileName = readUrlsFile()
-        build = lsedatasetBuild.lsedatasetBuild(fileName)
-        build.downloadFile()
+        if (fileName != ""):
+            build = lsedatasetBuild.lsedatasetBuild(fileName)
+            build.downloadFile()
 
     elif option == 2:
         ###################
@@ -134,12 +137,13 @@ while not exit:
         ##########################
 
         fileName = readTriplet()
-        videoStructure = videoStruct.VideoStruct(fileName)
-        listWords = videoStructure.convertChapters()
-        listWords = videoStructure.addVideoClips(listWords)
-        listWords = videoStructure.addPoses(listWords)
-        save = dataset.DataSet()
-        save.insertVideo(listWords)
+        if (fileName != ""):
+            videoStructure = videoStruct.VideoStruct(fileName)
+            listWords = videoStructure.convertChapters()
+            listWords = videoStructure.addVideoClips(listWords)
+            listWords = videoStructure.addPoses(listWords)
+            save = dataset.DataSet()
+            save.insertVideo(listWords)
 
     elif option == 9:
         #########################
