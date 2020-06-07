@@ -3,8 +3,14 @@ import base64
 import os, sys
 
 class VideoStruct(object):
-    def __init__(self,filename):
+    def __init__(self,filename, filter):
         self.fileName=filename
+        self.filter=filter
+        if (self.filter):
+            f=open('stopWords.txt','r')
+            mesage=f.readlines()
+            self.wordsFilter = mesage
+            f.close()
 
     def convertChapters(self):
         if((self.fileName!=None)|(self.fileName=="")):
@@ -24,11 +30,21 @@ class VideoStruct(object):
                         else:
                             if (l.find(" ") != -1):
                                 for word in l.split(" "):
+                                    if (self.filter):
+                                        if (word.lower() not in self.wordsFilter):
+                                            triplet['word'] = word.lower()
+                                            list.append(triplet)
+                                    else:
+                                        triplet['word'] = word.lower()
+                                        list.append(triplet)
+                            else:
+                                if (self.filter):
+                                    if (word.lower() not in self.wordsFilter):
+                                        triplet['word'] = word.lower()
+                                        list.append(triplet)
+                                else:
                                     triplet['word'] = word.lower()
                                     list.append(triplet)
-                            else:
-                                triplet['word'] = l.lower()
-                                list.append(triplet)
             return list
         else:
             raise Exception('The file name is wrong')
