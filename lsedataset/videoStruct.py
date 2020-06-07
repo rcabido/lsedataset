@@ -22,8 +22,13 @@ class VideoStruct(object):
                             time = l.split(" --> ")
                             triplet = {'start': time[0][:-1], 'end': time[1][:-1]}
                         else:
-                            triplet['word'] = l
-                            list.append(triplet)
+                            if (l.find(" ") != -1):
+                                for word in l.split(" "):
+                                    triplet['word'] = word.lower()
+                                    list.append(triplet)
+                            else:
+                                triplet['word'] = l.lower()
+                                list.append(triplet)
             return list
         else:
             raise Exception('The file name is wrong')
