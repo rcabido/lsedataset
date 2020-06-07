@@ -6,7 +6,7 @@ import os
 
 class Crawler (object):
 	def __init__(self,filename):
-		self.fileName=filename
+		self.fileName=filename + '.txt'
 
 	def crawlFile(self):
 		videos = []
