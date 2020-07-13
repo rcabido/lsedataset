@@ -15,20 +15,30 @@ class Crawler (object):
 			list=file.listUrls()
 			if(len(list)>0):
 				for item in list:
-					req=requests.get(item)
-					page=req.text
-					soup=scrap(page,'html.parser')
-					playlist=soup.find_all('h3',"playlist-title")
-					isPlaylist=True
-					if (len(playlist)<1):
-						isPlaylist=False
+					#req=requests.get(item)
+					#page=req.text
+					#soup=scrap(page,'html.parser')
+					#playlist=soup.find_all('h3',"playlist-title")
+					isPlaylist=False
+					if ('list' in item):
+						isPlaylist=True
 					if (isPlaylist):
-						titlePlaylist=soup.find_all('h3',"playlist-title")[0].contents[1].string
-						htmlVideos=soup.find_all('a',"playlist-video")
-						for htmlVideo in htmlVideos:
-							videos.append('https://www.youtube.com'+htmlVideo['href'])
+						#titlePlaylist=soup.find_all('h3',"playlist-title")[0].contents[1].string
+						#htmlVideos=soup.find_all('a',"playlist-video")
+						try:
+							playlist = pytube.Playlist(item)
+							for video_url in playlist.video_urls:
+								videos.append(video_url)
+							#for videoPlaylist in playlist:
+								#videos.append(videoPlaylist)
+						except Exception as e:
+							print(e)
 					else:
-						videos.append(item)
+						try:
+							#video = pytube.YouTube(item)
+							videos.append(item)
+						except Exception as e:
+							print(e)
 				return videos
 			else:
 				raise Exception('The file name is wrong.')
@@ -54,8 +64,9 @@ class Crawler (object):
 
 	def downloadItem(item):
 		try:
+			#print(item)
 			vid=pytube.YouTube(item)
-			print("Downloading " + item + "...")
+			print("Downloading " + vid.title + "...")
 			titleVideo=vid.title.replace(" ", "")
 			vid.streams.filter(progressive=True, file_extension='mp4').first().download(filename=titleVideo)
 			caption=vid.captions.get_by_language_code('es')
@@ -68,7 +79,7 @@ class Crawler (object):
 				subtitles.close()
 			return os.getcwd() + "/" + titleVideo + '.mp4'
 		except Exception as e:
-			print("Video Unavailable.")
+			print(e)
 			return None	
 
 
