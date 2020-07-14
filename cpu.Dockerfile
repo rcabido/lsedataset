@@ -18,7 +18,8 @@ COPY lsedataset/ lsedataset/
 RUN pip3 install -r Requirements.txt
 
 COPY bugPytube.sh ./
-COPY mixins.py ./
+COPY __main__.py ./
+COPY playlist.py ./
 
 RUN sh bugPytube.sh
 
@@ -52,4 +53,11 @@ ENV LANG es_ES.UTF-8
 ENV LANGUAGE es_ES:es
 ENV LC_ALL es_ES.UTF-8
 
-WORKDIR ./
+RUN sudo apt-get update && \
+    sudo apt-get -y install ffmpeg
+WORKDIR ../../
+COPY lsedataset/ lsedataset/
+WORKDIR lsedataset/
+USER root
+ENTRYPOINT ["python3"]
+CMD ["lsedataset.py"]
