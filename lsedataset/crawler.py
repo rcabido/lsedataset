@@ -67,7 +67,7 @@ class Crawler (object):
 			#print(item)
 			vid=pytube.YouTube(item)
 			print("Downloading " + vid.title + "...")
-			titleVideo=vid.title.replace(" ", "")
+			titleVideo=vid.title.replace(" ", "").replace(":", "").replace(".", "")
 			vid.streams.filter(progressive=True, file_extension='mp4').first().download(filename=titleVideo)
 			caption=vid.captions.get_by_language_code('es')
 			if (caption==None):
