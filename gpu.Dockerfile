@@ -14,7 +14,8 @@ RUN pip3 install -r Requirements.txt
 RUN sudo rm Requirements.txt
 
 COPY bugPytube.sh ./
-COPY mixins.py ./
+COPY __main__.py ./
+COPY playlist.py ./
 
 RUN sudo sh bugPytube.sh
 RUN sudo rm bugPytube.sh

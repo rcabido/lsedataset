@@ -12,8 +12,8 @@ class lsedatasetBuild:
         lista = crawl.crawlFile()
         for video in lista:
             aux = crawler.Crawler.downloadItem(video)
-            #if (aux!=None):
-                #lsedatasetBuild.buildPoseFile(aux)
+            if (aux!=None):
+                lsedatasetBuild.buildPoseFile(aux)
 
     def downloadSearch(self):
         crawl= crawler.Crawler(self.fileNameUrls)
